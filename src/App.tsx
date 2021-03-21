@@ -1,6 +1,6 @@
 import React from "react";
-import { Users } from "./components/Users";
-import { Todos } from "./components/Todos";
+import { Users } from "./shared/Users";
+import { Todos } from "./shared/Todos";
 
 const App: React.FC = () => {
   return (

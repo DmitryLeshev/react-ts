@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { TodoAction, Todo, TodoActionTypes } from "./rootTypes";
-import { RootState } from "./rootReducer";
+import { TodoAction, Todo, TodoActionTypes } from "../types";
+import { RootState } from "../reducers";
 // interface IFetchOptions {
 //   limit: number;
 //   page: number;
