@@ -1,11 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { TodoAction, Todo, TodoActionTypes } from "../types";
+import { TodoAction, Todo, TodoActionTypes } from "../types/todo";
 import { RootState } from "../reducers";
-// interface IFetchOptions {
-//   limit: number;
-//   page: number;
-// }
 
 export const fetchTodos = () => async (
   dispatch: Dispatch<TodoAction>,

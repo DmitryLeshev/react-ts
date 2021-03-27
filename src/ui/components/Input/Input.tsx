@@ -1,10 +1,7 @@
 import React from "react";
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export default (props: Props) => {
-  const { children } = props;
-  return <input>{children}</input>;
+// eslint-disable-next-line
+export default (props: any) => {
+  const { ...args } = props;
+  return <input {...args} />;
 };
