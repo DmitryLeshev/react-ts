@@ -1,15 +1,20 @@
 import React, { Suspense } from "react";
+import { renderRoutes } from "react-router-config";
+import routes from "./routes";
+
+import { useTranslation } from "react-i18next";
+
 import {
   CssBaseline,
   LinearProgress,
   makeStyles,
   Theme,
+  createStyles,
+  ThemeProvider,
 } from "@material-ui/core";
-import { createStyles, ThemeProvider } from "@material-ui/styles";
+import { SnackbarProvider } from "notistack";
 import { useCustomTheme } from "./ui/theme/theme";
-import { useTranslation } from "react-i18next";
-import routes from "./routes";
-import { renderRoutes } from "react-router-config";
+
 import { useTypedSelector } from "./hooks";
 
 const App: React.FC = () => {
@@ -33,8 +38,10 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={testTheme}>
-      <CssBaseline />
-      <Suspense fallback="loading">{renderRoutes(routes)}</Suspense>
+      <SnackbarProvider>
+        <CssBaseline />
+        <Suspense fallback="loading">{renderRoutes(routes)}</Suspense>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 };

@@ -1,18 +1,30 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Box, Button, Grid, Paper, Typography } from "@material-ui/core";
-import { changeLanguage, changeMode, getRandomInt } from "../../lib";
-import { Lang, Languages, languages } from "../../types/Languages";
-import { useTranslation } from "react-i18next";
-import useColorPicker from "../../hooks/useColorPicker";
+
+import { Lang, Languages } from "../../types/Languages";
+
+import { changeLanguage, changeMode } from "../../lib";
+import {
+  useActions,
+  useTypedSelector,
+  useDebounce,
+  useSnackbar,
+  useColorPicker,
+} from "../../hooks";
+
 import { ColorPicker } from "../../components";
-import { useActions, useTypedSelector, useDebounce } from "../../hooks";
+// import useRouter from "../../hooks/useRouter";
 
 export default () => {
   const { mode, colors } = useTypedSelector((state) => state.app);
   const { appChangeColors, appChangeMode, appChangeLang } = useActions();
   const { t } = useTranslation(["home", "settings"]);
 
+  // const { params } = useRouter();
+
+  const snackbar = useSnackbar();
   const primary = useColorPicker(colors.primary);
   const secondary = useColorPicker(colors.secondary);
 
@@ -37,6 +49,10 @@ export default () => {
     appChangeColors({
       primary: primary.color,
       secondary: secondary.color,
+    });
+    snackbar({
+      msg: `[primary: "${primary.color}"] [secondary: "${secondary.color}"]`,
+      variant: "success",
     });
   }
 

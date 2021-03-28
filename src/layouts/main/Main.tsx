@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: ITheme) =>
   createStyles({
     header: {
       width: "100%",
-      background: theme.palette.error.main,
+      background: theme.palette.primary.dark,
       height: theme.header.height,
     },
     main: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: ITheme) =>
       flexGrow: 1,
       width: `calc(100% - ${theme.sidenav.closeWidth}px)`,
       marginLeft: theme.sidenav.closeWidth,
-      background: theme.palette.warning.main,
+      background: theme.palette.primary.main,
       transition: "all 0.3s",
     },
     mainShift: {
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: ITheme) =>
       bottom: 0,
       left: 0,
       width: theme.sidenav.closeWidth,
-      background: theme.palette.success.main,
+      background: theme.palette.primary.light,
       transition: "all 0.3s",
     },
     sidenavShift: {
