@@ -18,6 +18,8 @@ interface Props {
   colors: IColors;
 }
 
+const theme = createMuiTheme({});
+
 export const useCustomTheme = (props: Props) => {
   const { type, colors } = props;
   const theme = React.useMemo(
@@ -39,7 +41,5 @@ export const useCustomTheme = (props: Props) => {
 
   return theme;
 };
-
-const theme = createMuiTheme({});
 
 export default theme;

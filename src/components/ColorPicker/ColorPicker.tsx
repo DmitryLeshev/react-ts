@@ -8,5 +8,5 @@ interface Props {
 
 export default (props: Props) => {
   const { onChangeComplete, color } = props;
-  return <SketchPicker color={color} onChangeComplete={onChangeComplete} />;
+  return <SketchPicker color={color} onChange={onChangeComplete} />;
 };
