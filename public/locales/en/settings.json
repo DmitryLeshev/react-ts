@@ -1,7 +1,7 @@
 {
-  "title": "Settings Willkommen zu react und react-i18next",
+  "title": "Settings Page",
   "description": {
-    "part1": "Um EN loszulegen, {{x}} ändere  und speichere um neuzuladen.",
-    "part2": "Wechsle die Sprache zwischen deutsch und englisch mit Hilfe der beiden Schalter."
+    "part1": "Description 1",
+    "part2": "Description 2"
   }
 }

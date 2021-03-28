@@ -1,3 +1,3 @@
-import { uiMd } from "./ui";
+import app from "./app";
 
-export default uiMd;
+export default [...app];

@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
-import { useActions } from "../hooks/useActions";
+import { useActions, useTypedSelector } from "../hooks";
 import useScroll from "../hooks/useScroll";
-import { useTypedSelector } from "../hooks/useTypesSelector";
 
 export const Todos: React.FC = () => {
   // eslint-disable-next-line

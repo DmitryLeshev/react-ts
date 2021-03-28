@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useActions } from "../hooks/useActions";
-import { useTypedSelector } from "../hooks/useTypesSelector";
+import { useActions, useTypedSelector } from "../hooks";
 
 export const Users: React.FC = () => {
   const { error, loading, users } = useTypedSelector((state) => state.user);

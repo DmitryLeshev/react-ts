@@ -1,40 +1,39 @@
 import { createMuiTheme } from "@material-ui/core";
 import React from "react";
-
-export type Mode = "dark" | "light";
-
-export enum Modes {
-  DARK = "dark",
-  LIGHT = "light",
-}
-
-export interface IColors {
-  primary: string;
-  secondary: string;
-}
+import { Colors, Mode } from "../../types/Theme";
 
 interface Props {
   type: Mode;
-  colors: IColors;
+  colors: Colors;
 }
-
-const theme = createMuiTheme({});
 
 export const useCustomTheme = (props: Props) => {
   const { type, colors } = props;
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
-        palette: {
-          type,
-          primary: {
-            main: colors.primary,
-          },
-          secondary: {
-            main: colors.secondary,
+      createMuiTheme(
+        {
+          palette: {
+            type,
+            primary: {
+              main: colors.primary,
+            },
+            secondary: {
+              main: colors.secondary,
+            },
           },
         },
-      }),
+        {
+          sidenav: {
+            closeWidth: 64,
+            openWidth: 220,
+          },
+          header: {
+            height: 72,
+          },
+          main: {},
+        }
+      ),
     // eslint-disable-next-line
     [props]
   );
@@ -42,4 +41,4 @@ export const useCustomTheme = (props: Props) => {
   return theme;
 };
 
-export default theme;
+export default useCustomTheme;
