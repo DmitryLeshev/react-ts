@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useEffect, useRef } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { bytesToSize } from "../../lib";
 import { Button } from "../../ui";
 import "./Card.css";
 
 export default () => {
+  const [imgs, setImgs] = useState<Array<string>>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {}, []);
@@ -12,15 +14,27 @@ export default () => {
   }
 
   function handlerChange(e: ChangeEvent<HTMLInputElement>) {
-    console.log("handlerChange");
+    if (!e.target.files?.length) return;
+
     const files = e.target.files;
-    console.log(files);
 
-    const reader = new FileReader();
-    console.log(reader);
+    setImgs([]);
 
-    // reader.readAsDataURL()
+    Array.from(files).forEach((file) => {
+      if (!file.type.match("image")) return;
+
+      const reader = new FileReader();
+
+      console.log(bytesToSize(file.size));
+
+      reader.onload = (e: any) => {
+        setImgs((prev) => [...prev, e.target.result]);
+      };
+
+      reader.readAsDataURL(file);
+    });
   }
+
   return (
     <div className="card">
       <input
@@ -33,6 +47,19 @@ export default () => {
       />
       <Button onClick={handlerClick}>Открыть</Button>
       <Button classes="primary">Загрузить</Button>
+
+      <br />
+
+      {imgs.length && (
+        <div className="preview">
+          {imgs.map((src, idx) => (
+            <div key={idx} className="preview__image">
+              <span className="preview__remove" />
+              <img src={src} alt="img" />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

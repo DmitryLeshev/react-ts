@@ -1,7 +1,7 @@
 import { Home } from "../pages";
 
 export default {
-  path: "/:id?",
+  path: "/",
   exact: true,
   component: Home,
 };

@@ -3,6 +3,7 @@ import clsx from "clsx";
 
 import React, { useState } from "react";
 import { renderRoutes } from "react-router-config";
+import { Link } from "react-router-dom";
 import { ITheme } from "../../types/Theme";
 
 interface Props {
@@ -21,10 +22,10 @@ export default (props: Props) => {
         onMouseLeave={(e) => setSidenav(false)}
         className={clsx(classes.sidenav, { [classes.sidenavShift]: sidenav })}
       >
-        Navigation
+        <Link to={`/`}>Home</Link>
+        <Link to={`/settings`}>Settings</Link>
       </nav>
       <main className={clsx(classes.main, { [classes.mainShift]: sidenav })}>
-        Main
         {renderRoutes(route.routes)}
       </main>
     </>
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme: ITheme) =>
     },
     main: {
       display: "flex",
+      flexDirection: "column",
       flexGrow: 1,
       width: `calc(100% - ${theme.sidenav.closeWidth}px)`,
       marginLeft: theme.sidenav.closeWidth,
@@ -60,6 +62,8 @@ const useStyles = makeStyles((theme: ITheme) =>
       top: theme.header.height,
       bottom: 0,
       left: 0,
+      display: "flex",
+      flexDirection: "column",
       width: theme.sidenav.closeWidth,
       background: theme.palette.primary.light,
       transition: "all 0.3s",
