@@ -3,6 +3,8 @@ import { bytesToSize } from "../../lib";
 import { Button } from "../../ui";
 import "./Card.css";
 
+import services from "../../services";
+
 export default () => {
   const [imgs, setImgs] = useState<Array<string>>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,6 +37,11 @@ export default () => {
     });
   }
 
+  async function downloadFile() {
+    const response = await services.api.users.getAll();
+    console.log(response);
+  }
+
   return (
     <div className="card">
       <input
@@ -46,7 +53,9 @@ export default () => {
         onChange={handlerChange}
       />
       <Button onClick={handlerClick}>Открыть</Button>
-      <Button classes="primary">Загрузить</Button>
+      <Button classes="primary" onClick={downloadFile}>
+        Загрузить
+      </Button>
 
       <br />
 
