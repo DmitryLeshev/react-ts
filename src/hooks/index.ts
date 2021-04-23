@@ -4,6 +4,8 @@ import useScroll from "./useScroll";
 import useTypedSelector from "./useTypedSelector";
 import useDebounce from "./useDebounce";
 import useSnackbar from "./useSnackbar";
+import useArray from "./useArray";
+import useInput from "./useInput";
 
 export {
   useColorPicker,
@@ -12,4 +14,6 @@ export {
   useTypedSelector,
   useDebounce,
   useSnackbar,
+  useArray,
+  useInput,
 };

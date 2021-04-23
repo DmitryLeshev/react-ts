@@ -3,7 +3,7 @@ import { bytesToSize } from "../../lib";
 import { Button } from "../../ui";
 import "./Card.css";
 
-import services from "../../services";
+import api from "../../services/api";
 
 export default () => {
   const [imgs, setImgs] = useState<Array<string>>([]);
@@ -38,8 +38,18 @@ export default () => {
   }
 
   async function downloadFile() {
-    const response = await services.api.users.getAll();
+    const response = await api.users.getAll();
     console.log(response);
+  }
+
+  async function getAllFile() {
+    const response = await api.files.getAll();
+    console.log(response);
+  }
+
+  async function getOneFile() {
+    const response = await api.files.getOne({ id: 5 });
+    setImgs((prev) => [...prev, response]);
   }
 
   return (
@@ -57,18 +67,26 @@ export default () => {
         Загрузить
       </Button>
 
+      <Button classes="primary" onClick={getAllFile}>
+        getAllFile
+      </Button>
+
+      <Button classes="primary" onClick={getOneFile}>
+        getOneFile
+      </Button>
+
       <br />
 
-      {imgs.length && (
+      {imgs.length ? (
         <div className="preview">
           {imgs.map((src, idx) => (
             <div key={idx} className="preview__image">
               <span className="preview__remove" />
-              <img src={src} alt="img" />
+              <img src={`data:image/png;base64, ${src}`} alt="img" />
             </div>
           ))}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

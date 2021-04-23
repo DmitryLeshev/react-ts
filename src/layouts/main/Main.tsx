@@ -4,6 +4,7 @@ import clsx from "clsx";
 import React, { useState } from "react";
 import { renderRoutes } from "react-router-config";
 import { Link } from "react-router-dom";
+import { Chat } from "../../components";
 import { ITheme } from "../../types/Theme";
 
 interface Props {
@@ -23,10 +24,13 @@ export default (props: Props) => {
         className={clsx(classes.sidenav, { [classes.sidenavShift]: sidenav })}
       >
         <Link to={`/`}>Home</Link>
+        <Link to={`/auth`}>Auth</Link>
+        <Link to={`/users`}>Users</Link>
         <Link to={`/settings`}>Settings</Link>
       </nav>
       <main className={clsx(classes.main, { [classes.mainShift]: sidenav })}>
         {renderRoutes(route.routes)}
+        <Chat />
       </main>
     </>
   );
@@ -40,6 +44,7 @@ const useStyles = makeStyles((theme: ITheme) =>
       height: theme.header.height,
     },
     main: {
+      position: "relative",
       display: "flex",
       flexDirection: "column",
       flexGrow: 1,

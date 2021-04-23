@@ -1,5 +1,6 @@
 import { Todos } from "./Todos";
 import { Users } from "./Users";
 import ColorPicker from "./ColorPicker";
+import Chat from "./Chat";
 
-export { Todos, Users, ColorPicker };
+export { Chat, Todos, Users, ColorPicker };
