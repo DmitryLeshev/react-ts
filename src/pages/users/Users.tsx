@@ -1,32 +1,41 @@
 import React, { useEffect } from "react";
-import api from "../../services/api/buildAPI";
-// import axios from "axios";
+
+import { ITheme } from "../../types/Theme";
+import { createStyles, Grid, makeStyles, Paper } from "@material-ui/core";
 
 export default () => {
-  const show = async () => {
-    const svg = await api.render("Rect1");
-    const output: any = document.getElementById("output");
-    output.innerHTML = svg;
-  };
-
-  const scenario = async () => {
-    await api.rect("Rect1", -10, 10, 10, -10);
-    await api.move("Rect1", 5, 5);
-    await api.rotate("Rect1", 5);
-    const data = await api.read("Rect1");
-    console.dir({ data });
-    await show();
-  };
-
+  const classes = useStyles();
   useEffect(() => {
-    // axios.get("/api/method2").then((res) => console.log(res.data));
-    scenario();
-  }, [scenario]);
+    console.log("[Page Users] mount");
+    return () => {
+      console.log("[Page Users] unmount");
+    };
+  }, []);
 
   return (
-    <div>
-      <button onClick={scenario}>Move</button>
-      <div id="output"></div>
-    </div>
+    <Grid className={classes.container} container>
+      <Grid className={classes.wrapper} component={Paper} item xs={6}>
+        Page Users
+      </Grid>
+    </Grid>
   );
 };
+
+const useStyles = makeStyles((theme: ITheme) =>
+  createStyles({
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      flexGrow: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      padding: theme.spacing(3),
+    },
+    wrapper: {
+      display: "flex",
+      flexDirection: "column",
+      padding: theme.spacing(3),
+      minWidth: 600,
+    },
+  })
+);

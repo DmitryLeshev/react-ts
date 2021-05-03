@@ -13,13 +13,13 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
-import { useCustomTheme } from "./ui/theme/theme";
+import { useCustomTheme } from "./ui/material/theme/theme";
 
 import { useTypedSelector } from "./hooks";
 
 const App: React.FC = () => {
   const classes = useStyles();
-  const { colors, mode } = useTypedSelector((state) => state.app);
+  const { colors, mode } = useTypedSelector((state) => state.app.theme);
   const { ready: i18nReady } = useTranslation();
 
   const testTheme = useCustomTheme({
@@ -58,3 +58,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default App;
+
+// [ ] - Установить зависмости [mobx, saga, bootstrap, styled-component, react-transition-group]
+// [ ] - Проверить работу способность redux thunks и saga
+// [ ] - Подключить mobx, bootstrap, styled-component, css.modules
+// [ ] - Сверстать страницу Регистрации
+// [ ] - Сверстать страницу Авторизации
+// [ ] - Сверстать Лэйаут
+// [ ] - Сверстать Навигационную панель

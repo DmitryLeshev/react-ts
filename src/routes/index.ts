@@ -1,6 +1,7 @@
 import { Main } from "../layouts";
 
-const nameRouters = ["home", "settings", "auth", "users"];
+import nameRouters from "../configs/routes";
+// const nameRouters = ["home", "settings", "auth", "users"];
 
 function getRoute(nameRoute: string) {
   const route = require(`./${nameRoute}`);

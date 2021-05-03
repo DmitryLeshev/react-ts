@@ -3,7 +3,7 @@ import { bytesToSize } from "../../lib";
 import { Button } from "../../ui";
 import "./Card.css";
 
-import api from "../../services/api";
+import api from "../../api";
 
 export default () => {
   const [imgs, setImgs] = useState<Array<string>>([]);

@@ -7,7 +7,7 @@ export default ({ initialValue }: Props) => {
   const [value, setValue] = useState(initialValue);
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (!event) return;
+    if (!event) return "";
     setValue(event.target.value);
   }
 

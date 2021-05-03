@@ -1,88 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import {
-  Button,
-  createStyles,
-  Grid,
-  makeStyles,
-  TextField,
-} from "@material-ui/core";
-
-import useInput from "../../hooks/useInput";
 import { ITheme } from "../../types/Theme";
+import { createStyles, Grid, makeStyles, Paper } from "@material-ui/core";
 
-export default (props: any) => {
-  const classes = useStyles(props);
-  const [state, setState] = useState<any>(null);
-  const key = useInput({ initialValue: "" });
-  const value = useInput({ initialValue: "" });
-
+export default () => {
+  const classes = useStyles();
   useEffect(() => {
-    console.log("[Auth] mount");
-
+    console.log("[Page Auth] mount");
     return () => {
-      console.log("[Auth] unmount");
+      console.log("[Page Auth] unmount");
     };
   }, []);
 
-  function set({ key, value }: { key: string; value: string }) {
-    console.log("localStorage.setItem: key = ", key, "valeu = ", value);
-    localStorage.setItem(key, value);
-  }
-
-  function get({ key }: { key: string }) {
-    console.log("localStorage.getItem: key = ", key);
-    return localStorage.getItem(key);
-  }
-
-  function remove({ key }: { key: string }) {
-    console.log("localStorage.removeItem: key = ", key);
-    return localStorage.removeItem(key);
-  }
-
-  function clear() {
-    console.log("localStorage.clear");
-    return localStorage.clear();
-  }
-
-  function handlerBtnGet() {
-    const data = get({ key: key.value });
-    setState(data);
-  }
-
-  function handlerBtnSet() {
-    set({ key: key.value, value: value.value });
-  }
-
-  console.log("state", state);
-
   return (
-    <div className={classes.container}>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={3}>
-          <TextField {...key} label="Key" />
-          <TextField {...value} label="Value" />
-        </Grid>
-
-        <Grid item xs={3}>
-          <Button onClick={handlerBtnGet}>Get Local Storage</Button>
-        </Grid>
-
-        <Grid item xs={3}>
-          <Button onClick={handlerBtnSet}>Set Local Storage</Button>
-        </Grid>
-
-        <Grid item xs={3}>
-          <Button onClick={() => remove({ key: key.value })}>
-            Remove Local Storage
-          </Button>
-        </Grid>
-
-        <Grid item xs={3}>
-          <Button onClick={clear}>Clear Local Storage</Button>
-        </Grid>
+    <Grid className={classes.container} container>
+      <Grid className={classes.wrapper} component={Paper} item xs={6}>
+        Page Auth
       </Grid>
-    </div>
+    </Grid>
   );
 };
 
@@ -92,7 +27,15 @@ const useStyles = makeStyles((theme: ITheme) =>
       display: "flex",
       flexDirection: "column",
       flexGrow: 1,
+      alignItems: "center",
+      justifyContent: "center",
       padding: theme.spacing(3),
+    },
+    wrapper: {
+      display: "flex",
+      flexDirection: "column",
+      padding: theme.spacing(3),
+      minWidth: 600,
     },
   })
 );

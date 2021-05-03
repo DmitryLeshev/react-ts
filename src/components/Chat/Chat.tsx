@@ -9,9 +9,11 @@ import {
   Paper,
 } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 import { ITheme } from "../../types/Theme";
-import { useArray, useInput } from "../../hooks";
+import { useActions, useArray, useInput, useTypedSelector } from "../../hooks";
 import { NotConnected } from "./components";
 import Message from "./components/Message";
 
@@ -21,9 +23,12 @@ export enum Events {
 }
 
 export default () => {
-  const classes = useStyles();
+  const { isOpenChat } = useTypedSelector((state) => state.app);
+  const { appChangeChat } = useActions();
+  const classes = useStyles({ isOpenChat });
+
   const [connected, setConnected] = useState(false);
-  const [username, _setUsername] = useState("Dima");
+  const [username] = useState("Dima");
   const messages = useArray({ initialArray: [] });
   const { clear: messageClear, ...message } = useInput({ initialValue: "" });
 
@@ -77,47 +82,65 @@ export default () => {
 
   return (
     <div className={classes.chat}>
-      <div className={classes.messages}>
-        {connected ? (
-          messages.array.map((message: any) => (
-            <Message key={message.id} message={message} />
-          ))
-        ) : (
-          <NotConnected connect={connect} />
-        )}
-      </div>
-      <Paper square className={classes.root}>
-        <InputBase
-          className={classes.input}
-          placeholder="Написать сообщение..."
-          multiline
-          {...message}
-        />
-        <Divider className={classes.divider} orientation="vertical" />
+      <div className={classes.close}>
         <IconButton
-          color="primary"
-          className={classes.iconButton}
-          onClick={sendMessage}
+          className={classes.iconClose}
+          size="small"
+          onClick={() => appChangeChat()}
         >
-          <SendIcon color="secondary" />
+          {isOpenChat ? (
+            <FullscreenExitIcon className={classes.screenIcon} />
+          ) : (
+            <FullscreenIcon className={classes.screenIcon} />
+          )}
         </IconButton>
-      </Paper>
+      </div>
+      {isOpenChat ? (
+        <>
+          <div className={classes.messages}>
+            {connected ? (
+              messages.array.map((message: any) => (
+                <Message key={message.id} message={message} />
+              ))
+            ) : (
+              <NotConnected connect={connect} />
+            )}
+          </div>
+          <Paper square className={classes.root}>
+            <InputBase
+              className={classes.input}
+              placeholder="Написать сообщение..."
+              multiline
+              {...message}
+            />
+            <Divider className={classes.divider} orientation="vertical" />
+            <IconButton
+              color="primary"
+              className={classes.iconButton}
+              onClick={sendMessage}
+            >
+              <SendIcon color="secondary" />
+            </IconButton>
+          </Paper>
+        </>
+      ) : null}
     </div>
   );
 };
 
 const useStyles = makeStyles((theme: ITheme) =>
   createStyles({
-    chat: {
+    chat: ({ isOpenChat }: { isOpenChat: boolean }) => ({
       position: "absolute",
       bottom: 0,
       right: theme.spacing(3),
       display: "flex",
       flexDirection: "column",
-      width: 300,
-      height: 400,
+      width: isOpenChat ? 300 : 50,
+      height: isOpenChat ? 400 : 100,
       backgroundColor: theme.palette.background.default,
-    },
+      boxShadow: theme.shadows[3],
+    }),
     root: {
       padding: "2px 4px",
       display: "flex",
@@ -170,5 +193,21 @@ const useStyles = makeStyles((theme: ITheme) =>
       justifyContent: "center",
     },
     connectedButton: {},
+    close: {
+      position: "relative",
+      display: "flex",
+      padding: theme.spacing(0.5),
+      backgroundColor: theme.palette.background.paper,
+    },
+    iconClose: {
+      marginLeft: "auto",
+      marginRight: theme.spacing(0.5),
+      width: 16,
+      height: 16,
+    },
+    screenIcon: {
+      width: 16,
+      height: 16,
+    },
   })
 );

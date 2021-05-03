@@ -1,5 +1,5 @@
-import Button from "./components/Button";
-import Input from "./components/Input";
-import theme from "./theme";
+import Button from "./native/components/Button";
+import Input from "./native/components/Input";
+import theme from "./material/theme";
 
 export { Button, Input, theme };

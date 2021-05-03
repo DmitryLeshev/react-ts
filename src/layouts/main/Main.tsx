@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { renderRoutes } from "react-router-config";
 import { Link } from "react-router-dom";
 import { Chat } from "../../components";
+import { useTypedSelector } from "../../hooks";
 import { ITheme } from "../../types/Theme";
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 export default (props: Props) => {
   const { route } = props;
   const classes = useStyles();
+  const { isLogged } = useTypedSelector((state) => state.app);
   const [sidenav, setSidenav] = useState(false);
   return (
     <>
@@ -30,7 +32,7 @@ export default (props: Props) => {
       </nav>
       <main className={clsx(classes.main, { [classes.mainShift]: sidenav })}>
         {renderRoutes(route.routes)}
-        <Chat />
+        {isLogged && <Chat />}
       </main>
     </>
   );
