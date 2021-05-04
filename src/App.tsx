@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default App;
 
-// [ ] - Установить зависмости [mobx, saga, bootstrap, styled-component, react-transition-group]
-// [ ] - Проверить работу способность redux thunks и saga
-// [ ] - Подключить mobx, bootstrap, styled-component, css.modules
+// [x] - Установить зависмости [mobx, saga, bootstrap, styled-component, react-transition-group]
+// [x] - Проверить работу способность redux thunks и saga
+// [x] - Подключить mobx, bootstrap, styled-component, css.modules
 // [ ] - Сверстать страницу Регистрации
 // [ ] - Сверстать страницу Авторизации
 // [ ] - Сверстать Лэйаут

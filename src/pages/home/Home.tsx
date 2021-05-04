@@ -1,48 +1,86 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
-import { ITheme } from "../../types/Theme";
+import { Button } from "react-bootstrap";
+
 import { createStyles, Grid, makeStyles, Paper } from "@material-ui/core";
-import { Counter } from "../../components";
-import { useActions, useTypedSelector } from "../../hooks";
+import { ITheme } from "../../types/Theme";
 
-export default () => {
+import { observer } from "mobx-react-lite";
+import counter from "../../stores/mobX/count";
+import todo from "../../stores/mobX/todo";
+
+import { Counter } from "../../components";
+import { Title } from "../../ui/styled-components/components";
+import { Input } from "../../ui/native/components";
+
+// import { useActions, useTypedSelector } from "../../hooks";
+
+export default observer(() => {
   const classes = useStyles();
-  const { count, user } = useTypedSelector((state) => state);
-  const {
-    incrementCount,
-    decrementCount,
-    incrementCountAsync,
-    fetchTodos,
-    fetchUsers,
-  } = useActions();
+  // const { count, user } = useTypedSelector((state) => state);
+  // const {
+  //   incrementCount,
+  //   decrementCount,
+  //   incrementCountAsync,
+  //   fetchUsersSaga,
+  // } = useActions();
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     console.log("[Page Home] mount");
-    fetchTodos();
-    fetchUsers();
+    inputRef.current?.focus();
+
     return () => {
       console.log("[Page Home] unmount");
     };
   }, []);
 
-  console.log(user);
-
   const counterProps = {
-    value: count.count,
-    onIncrement: incrementCount,
-    onDecrement: decrementCount,
-    onIncrementAsync: incrementCountAsync,
+    value: counter.value,
+    onIncrement: () => counter.increment(),
+    onDecrement: () => counter.decrement(),
+    onIncrementAsync: () => setTimeout(() => counter.increment(), 1000),
   };
 
   return (
     <Grid className={classes.container} container>
       <Grid className={classes.wrapper} component={Paper} item xs={6}>
-        Page Home
+        <Title>Page Home (styled-compenents)</Title>
         <Counter {...counterProps} />
+        <Input ref={inputRef} />
+        <Button
+          variant="success"
+          className="mb-2 mt-2"
+          onClick={() => {
+            todo.addTodo({
+              id: todo?.todos[todo?.todos?.length - 1]?.id + 1 || 1,
+              title: inputRef.current?.value,
+              completed: false,
+            });
+          }}
+        >
+          Add
+        </Button>
+        {todo.todos.map((t) => (
+          <div
+            className="mb-2"
+            key={t.id}
+            onClick={() => todo.completedTodo(t)}
+          >
+            {t.completed ? "[ v ]" : "[ x ]"} {t.title}
+            <button
+              className="ml-2 btn btn-outline-danger btn-sm"
+              onClick={() => todo.removeTodo(t)}
+            >
+              Del
+            </button>
+          </div>
+        ))}
       </Grid>
     </Grid>
   );
-};
+});
 
 const useStyles = makeStyles((theme: ITheme) =>
   createStyles({

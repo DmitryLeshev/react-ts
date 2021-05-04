@@ -1,1 +1,4 @@
-export default () => console.log("test");
+import Input from "./Input";
+import Button from "./Button";
+
+export { Button, Input };

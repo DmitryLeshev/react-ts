@@ -18,5 +18,5 @@ function* fetchUserWorker() {
 }
 
 export function* userWatcher() {
-  yield takeEvery(UserActionTypes.FETCH_USERS, fetchUserWorker);
+  yield takeEvery(UserActionTypes.FETCH_USERS_SAGA, fetchUserWorker);
 }

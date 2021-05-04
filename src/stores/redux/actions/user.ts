@@ -4,6 +4,7 @@ import {
   FetchUsersAction,
   FetchUsersSuccessAction,
   FetchUsersErrorAction,
+  FetchUsersActionSaga,
 } from "../types/user";
 
 const fetchUsersLoading = (): FetchUsersAction => ({
@@ -20,4 +21,13 @@ const fetchUsersError = (error: string): FetchUsersErrorAction => ({
   payload: error,
 });
 
-export default { fetchUsersLoading, fetchUsersSuccess, fetchUsersError };
+const fetchUsersSaga = (): FetchUsersActionSaga => ({
+  type: UserActionTypes.FETCH_USERS_SAGA,
+});
+
+export default {
+  fetchUsersLoading,
+  fetchUsersSuccess,
+  fetchUsersError,
+  fetchUsersSaga,
+};

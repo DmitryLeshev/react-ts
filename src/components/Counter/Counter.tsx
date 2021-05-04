@@ -4,7 +4,7 @@ interface Props {
   value: number;
   onIncrement: () => void;
   onDecrement: () => void;
-  onIncrementAsync: ({ ms }: { ms: number }) => void;
+  onIncrementAsync: () => void;
 }
 
 export default ({
@@ -14,9 +14,7 @@ export default ({
   onIncrementAsync,
 }: Props) => (
   <div>
-    <button onClick={() => onIncrementAsync({ ms: 2000 })}>
-      Increment after 1 second
-    </button>{" "}
+    <button onClick={onIncrementAsync}>Increment after 1 second</button>{" "}
     <button onClick={onIncrement}>Increment</button>
     <button onClick={onDecrement}>Decrement</button>
     <hr />
