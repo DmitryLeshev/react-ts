@@ -11,7 +11,6 @@ import todo from "../../stores/mobX/todo";
 
 import { Counter } from "../../components";
 import { Title } from "../../ui/styled-components/components";
-import { Input } from "../../ui/native/components";
 
 // import { useActions, useTypedSelector } from "../../hooks";
 
@@ -48,7 +47,7 @@ export default observer(() => {
       <Grid className={classes.wrapper} component={Paper} item xs={6}>
         <Title>Page Home (styled-compenents)</Title>
         <Counter {...counterProps} />
-        <Input ref={inputRef} />
+        <input ref={inputRef} />
         <Button
           variant="success"
           className="mb-2 mt-2"

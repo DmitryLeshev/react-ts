@@ -8,7 +8,9 @@ import { store } from "./stores/redux/store";
 import App from "./App";
 
 import "./lib/i18n";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 const app = (
   <Provider store={store}>
